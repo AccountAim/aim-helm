@@ -1,0 +1,93 @@
+require:
+  - ./.rubocop/cop/layout/adjacent_one_line_defs.rb
+  - ./.rubocop/cop/layout/empty_lines_around_multiline_blocks.rb
+  - ./.rubocop/cop/layout/empty_lines_around_multiline_constants.rb
+
+AllCops:
+  TargetRubyVersion: 3.4
+  NewCops: enable
+  SuggestExtensions: false
+  Include:
+    - "**/*.rb"
+    - "**/*.gemspec"
+    - ".rubocop/**/*.rb"
+    - "Gemfile"
+    - "Rakefile"
+
+Layout/LineLength:
+  Max: 100
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Layout/EmptyLineBetweenDefs:
+  AllowAdjacentOneLineDefs: true
+
+Layout/AdjacentOneLineDefs:
+  Include:
+    - "**/*.rb"
+
+Layout/EmptyLinesAroundMultilineBlocks:
+  Include:
+    - "lib/**/*.rb"
+
+Layout/EmptyLinesAroundMultilineConstants:
+  Include:
+    - "lib/**/*.rb"
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*_spec.rb
+    - spec/support/**/*.rb
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Max: 9
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Naming/FileName:
+  # Bundler requires this hyphenated entrypoint for `require "aim-helm"`.
+  Exclude:
+    - "lib/aim-helm.rb"
+
+Naming/PredicateMethod:
+  Exclude:
+    - "lib/aim_helm/stores/active_record/lease.rb"
+
+# Specs keep named block params: `it` collides with RSpec's own `it` DSL, and example
+# objects flow through `around do |example|` blocks where `it` cannot reach.
+Style/ItBlockParameter:
+  EnforcedStyle: always
+  Exclude:
+    - spec/**/*

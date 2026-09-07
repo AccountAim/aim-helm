@@ -1,0 +1,34 @@
+event: response.output_item.added
+data: {"type":"response.output_item.added","output_index":0,"item":{"id":"rs_123","type":"reasoning","summary":[]}}
+
+event: response.reasoning_summary_text.delta
+data: {"type":"response.reasoning_summary_text.delta","output_index":0,"summary_index":0,"delta":"Use the weather tool."}
+
+event: response.output_item.done
+data: {"type":"response.output_item.done","output_index":0,"item":{"id":"rs_123","type":"reasoning","summary":[{"type":"summary_text","text":"Use the weather tool."}],"encrypted_content":"encrypted_reasoning"}}
+
+event: response.output_item.added
+data: {"type":"response.output_item.added","output_index":1,"item":{"id":"msg_123","type":"message","role":"assistant","content":[]}}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","output_index":1,"content_index":0,"delta":"Checking now."}
+
+event: response.output_item.done
+data: {"type":"response.output_item.done","output_index":1,"item":{"id":"msg_123","type":"message","role":"assistant","status":"completed","content":[{"type":"output_text","text":"Checking now.","annotations":[]}]}}
+
+event: response.output_item.added
+data: {"type":"response.output_item.added","output_index":2,"item":{"id":"fc_123","type":"function_call","call_id":"call_123","name":"weather","arguments":""}}
+
+event: response.function_call_arguments.delta
+data: {"type":"response.function_call_arguments.delta","output_index":2,"delta":"{\"city\":"}
+
+event: response.function_call_arguments.delta
+data: {"type":"response.function_call_arguments.delta","output_index":2,"delta":"\"Seattle\"}"}
+
+event: response.output_item.done
+data: {"type":"response.output_item.done","output_index":2,"item":{"id":"fc_123","type":"function_call","call_id":"call_123","name":"weather","arguments":"{\"city\":\"Seattle\"}"}}
+
+event: response.completed
+data: {"type":"response.completed","response":{"id":"resp_123","status":"completed","usage":{"input_tokens":60,"input_tokens_details":{"cached_tokens":10,"cache_write_tokens":20},"output_tokens":5,"output_tokens_details":{"reasoning_tokens":2},"total_tokens":65}}}
+
+data: [DONE]
