@@ -57,6 +57,17 @@ models:
     reasoning_effort: false
     vision: true
 
+  gpt-6-astra:
+    provider: openai
+    input: 10.0
+    output: 50.0
+    cached_input: 1.0
+    cache_write: 0.0
+    context: 1050000
+    max_output: 128000
+    reasoning_effort: true
+    vision: true
+
   gpt-5.6-sol:
     provider: openai
     input: 5.0
