@@ -12,6 +12,7 @@ RSpec.describe AimHelm::Catalog::Model do
       "gpt-5.6-luna",
       "gpt-5.6-sol",
       "gpt-5.6-terra",
+      "gpt-6-astra",
     )
     expect(AimHelm.models.fetch("gpt-5.6").input).to eq(5.0)
   end
