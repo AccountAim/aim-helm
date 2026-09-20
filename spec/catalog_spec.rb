@@ -14,7 +14,14 @@ RSpec.describe AimHelm::Catalog::Model do
       "gpt-5.6-terra",
       "gpt-6-astra",
     )
-    expect(AimHelm.models.fetch("gpt-5.6").input).to eq(5.0)
+    expect(AimHelm.models.fetch("gpt-5.6").input).to eq(4.0)
+  end
+
+  it "carries the flagship's rates and limits" do
+    expect(AimHelm.models.fetch("gpt-6-astra")).to have_attributes(
+      provider: :openai, input: 10.0, cached_input: 1.0, output: 50.0, cache_write: 0.0,
+      context: 1_050_000, max_output: 128_000, reasoning_effort: true, vision: true
+    )
   end
 
   it "prices regular and cached tokens without charging OpenAI cache writes" do
@@ -25,13 +32,13 @@ RSpec.describe AimHelm::Catalog::Model do
       cache_write_tokens: 100,
     )
 
-    expect(AimHelm.models.fetch("gpt-5.6-sol").cost(usage)).to eq(0.0201)
+    expect(AimHelm.models.fetch("gpt-5.6-sol").cost(usage)).to eq(0.01408)
   end
 
-  it "keeps GPT-5.6 cache-write rates at zero" do
-    %w[gpt-5.6-sol gpt-5.6-terra gpt-5.6-luna].each do |id|
-      expect(AimHelm.models.fetch(id).cache_write).to eq(0.0)
-    end
+  it "keeps every OpenAI cache-write rate at zero" do
+    openai = AimHelm.models.values.select { it.provider == :openai }
+    expect(openai).not_to be_empty
+    expect(openai.map(&:cache_write)).to all(eq(0.0))
   end
 
   it "loads host aliases over an existing catalog" do
