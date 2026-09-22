@@ -13,14 +13,14 @@ RSpec.describe AimHelm::Subagents::Report do
       mode: :background,
       options: AimHelm::Agent::Record.new(
         system: "Research carefully.",
-        model: "gpt-5.6-luna",
+        model: "gpt-6-luna",
       ),
     )
   end
   let(:assistant) do
     {
       content: [{ type: "text", text: "Research complete" }],
-      model: "gpt-5.6-luna",
+      model: "gpt-6-luna",
       provider: :openai,
       stop_reason: :stop,
     }

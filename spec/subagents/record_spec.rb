@@ -4,7 +4,7 @@ RSpec.describe AimHelm::Subagents::Record do
   let(:options) do
     AimHelm::Agent::Record.new(
       system: "Research carefully.",
-      model: "gpt-5.6-luna",
+      model: "gpt-6-luna",
     )
   end
   let(:record) do

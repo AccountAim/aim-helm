@@ -1,5 +1,5 @@
 aliases:
-  gpt-5.6: gpt-5.6-sol
+  gpt-6: gpt-6-sol
 
 models:
   claude-fable-5:
@@ -68,12 +68,22 @@ models:
     reasoning_effort: true
     vision: true
 
-  # Promotional rate, at least through 2026-11-21; list is 5.0 / 30.0 / 0.5.
-  gpt-5.6-sol:
+  gpt-6-sol:
     provider: openai
-    input: 4.0
-    output: 20.0
-    cached_input: 0.4
+    input: 2.0
+    output: 10.0
+    cached_input: 0.2
+    cache_write: 0.0
+    context: 1050000
+    max_output: 128000
+    reasoning_effort: true
+    vision: true
+
+  gpt-6-luna:
+    provider: openai
+    input: 0.1
+    output: 0.5
+    cached_input: 0.01
     cache_write: 0.0
     context: 1050000
     max_output: 128000
@@ -91,13 +101,3 @@ models:
     reasoning_effort: true
     vision: true
 
-  gpt-5.6-luna:
-    provider: openai
-    input: 0.2
-    output: 1.2
-    cached_input: 0.02
-    cache_write: 0.0
-    context: 1050000
-    max_output: 128000
-    reasoning_effort: true
-    vision: true

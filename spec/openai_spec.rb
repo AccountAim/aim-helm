@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe AimHelm::Providers::OpenAI do
-  let(:model) { "gpt-5.6-sol" }
+  let(:model) { "gpt-6-sol" }
   let(:records) { sse_records("streams/openai_turn.sse") }
 
   it "assembles normalized events and replays exact same-model items" do

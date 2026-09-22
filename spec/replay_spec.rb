@@ -8,7 +8,7 @@ RSpec.describe AimHelm::Replay do
         :assistant,
         {
           content: [{ type: "tool_call", id: "call-1", name: "weather", arguments: {} }],
-          model: "gpt-5.6-luna",
+          model: "gpt-6-luna",
           provider: "openai",
           stop_reason: "tool_use",
           usage: { input_tokens: 3, output_tokens: 2, cost: 0.001 },
@@ -28,7 +28,7 @@ RSpec.describe AimHelm::Replay do
 
     expect(messages.map(&:role)).to eq(%i[user assistant tool])
     expect(messages[1]).to have_attributes(
-      model: "gpt-5.6-luna",
+      model: "gpt-6-luna",
       provider: :openai,
       stop_reason: :tool_use,
       usage: have_attributes(input_tokens: 3, output_tokens: 2),
@@ -45,7 +45,7 @@ RSpec.describe AimHelm::Replay do
       :assistant,
       {
         content: [{ type: "tool_call", id: "call-1", name: "weather", arguments: {} }],
-        model: "gpt-5.6-luna",
+        model: "gpt-6-luna",
         provider: "openai",
         stop_reason: "tool_use",
       },
@@ -81,7 +81,7 @@ RSpec.describe AimHelm::Replay do
         :assistant,
         {
           content: "Old answer",
-          model: "gpt-5.6-luna",
+          model: "gpt-6-luna",
           provider: "openai",
           stop_reason: "stop",
         },

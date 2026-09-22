@@ -22,7 +22,7 @@ RSpec.describe "AimHelm subagents" do
 
   it "wraps an ordinary agent in a narrow dispatch grant" do
     agent = AimHelm.agent(
-      "gpt-5.6-luna",
+      "gpt-6-luna",
       name: "researcher",
       description: "Researches one question",
       instructions: "Research carefully.",
@@ -56,7 +56,7 @@ RSpec.describe "AimHelm subagents" do
     store = AimHelm::Stores::Memory.new
     parent = AimHelm::Session.new(store:, id: "parent-1")
     child = AimHelm::Session.new(store:, id: "child-1")
-    options = AimHelm::Agent::Record.new(system: "Research.", model: "gpt-5.6-luna")
+    options = AimHelm::Agent::Record.new(system: "Research.", model: "gpt-6-luna")
     record = AimHelm::Subagents::Record.new(
       session_id: child.id,
       parent_session_id: parent.id,
@@ -74,7 +74,7 @@ RSpec.describe "AimHelm subagents" do
       :assistant,
       {
         content: [{ type: "text", text: "Ready" }],
-        model: "gpt-5.6-luna",
+        model: "gpt-6-luna",
         provider: :fake,
         stop_reason: :stop,
       },
@@ -110,7 +110,7 @@ RSpec.describe "AimHelm subagents" do
   let(:options) do
     AimHelm::Agent.new(
       instructions: "Coordinate the work.",
-      model: "gpt-5.6-luna",
+      model: "gpt-6-luna",
       tools: [lookup],
       subagents: [definition],
       reminders: [AimHelm::Reminder.new(text: "Stay focused.", every: 3)],
@@ -138,7 +138,7 @@ RSpec.describe "AimHelm subagents" do
     )
     expect(record.options).to have_attributes(
       system: "Research carefully.",
-      model: "gpt-5.6-luna",
+      model: "gpt-6-luna",
       tools: ["reports/lookup"],
       subagents: nil,
       reminders: [have_attributes(text: "Stay focused.", every: 3)],
@@ -309,7 +309,7 @@ RSpec.describe "AimHelm subagents" do
   end
 
   def spawn_tool(options:, host:)
-    models = ["gpt-5.6-luna"]
+    models = ["gpt-6-luna"]
     spawner = AimHelm::Subagents::Spawner.new(options:, host:, models:)
     AimHelm::Tools::Agents::Spawn.new(options:, spawner:, models:).tools.fetch(0)
   end
