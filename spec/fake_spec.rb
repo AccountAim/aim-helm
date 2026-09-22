@@ -22,7 +22,7 @@ RSpec.describe AimHelm::Providers::Fake do
     tool = AimHelm::Tool.define("lookup", "Looks up a report") { "found" }
     options = AimHelm::Agent.new(
       instructions: "Answer accurately.",
-      model: "gpt-5.6-luna",
+      model: "gpt-6-luna",
       tools: [tool],
     )
     events = []
@@ -68,7 +68,7 @@ RSpec.describe AimHelm::Providers::Fake do
         described_class.new(model:, turns: [{ text: "Factory response" }])
       end
     end
-    options = AimHelm::Agent.new(instructions: "Answer.", model: "gpt-5.6-luna")
+    options = AimHelm::Agent.new(instructions: "Answer.", model: "gpt-6-luna")
 
     session = @session.new(config: AimHelm.config)
     result = options.run("Hello", session:)
@@ -167,6 +167,6 @@ RSpec.describe AimHelm::Providers::Fake do
   end
 
   def default_options
-    AimHelm::Agent.new(instructions: "Answer.", model: "gpt-5.6-luna")
+    AimHelm::Agent.new(instructions: "Answer.", model: "gpt-6-luna")
   end
 end

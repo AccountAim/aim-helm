@@ -7,7 +7,7 @@ module AimHelm
     # captured in `#requests`.
     class Fake < Dry::Struct
       attribute :chunk_size, Types::Coercible::Integer.constrained(gt: 0).default(12)
-      attribute :model, Types::String.default("gpt-5.6-luna")
+      attribute :model, Types::String.default("gpt-6-luna")
       attribute :turns, Types::Array.of(Types::JsonObject).default([].freeze)
 
       def stream(system: nil, messages: [], tools: [], output_schema: nil, &emit)

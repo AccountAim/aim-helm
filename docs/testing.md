@@ -4,7 +4,7 @@ Inject the fake provider to test agent behavior without network requests:
 
 ```ruby
 provider = AimHelm::Providers::Fake.new(
-  model: "gpt-5.6-luna",
+  model: "gpt-6-luna",
   turns: [
     {
       tool_calls: [
@@ -20,7 +20,7 @@ provider = AimHelm::Providers::Fake.new(
 )
 
 agent = AimHelm.agent(
-  "gpt-5.6-luna",
+  "gpt-6-luna",
   tools: [lookup_report],
   provider:,
 )

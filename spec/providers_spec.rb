@@ -2,7 +2,7 @@
 
 RSpec.describe AimHelm::Providers do
   it "infers the provider from the allowlisted model" do
-    expect(AimHelm.provider("gpt-5.6", api_key: "key")).to be_a(AimHelm::Providers::OpenAI)
+    expect(AimHelm.provider("gpt-6", api_key: "key")).to be_a(AimHelm::Providers::OpenAI)
     expect(AimHelm.provider("claude-opus-5", api_key: "key")).to be_a(
       AimHelm::Providers::Anthropic,
     )

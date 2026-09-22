@@ -13,7 +13,7 @@ RSpec.describe AimHelm::Control do
   let(:record) do
     AimHelm::Agent::Record.new(
       system: "Answer accurately.",
-      model: "gpt-5.6-luna",
+      model: "gpt-6-luna",
     )
   end
 

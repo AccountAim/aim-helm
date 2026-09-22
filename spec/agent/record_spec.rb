@@ -10,13 +10,13 @@ RSpec.describe AimHelm::Agent::Record do
   let(:options) do
     AimHelm::Agent.new(
       instructions: "Answer accurately.",
-      model: "gpt-5.6-luna",
+      model: "gpt-6-luna",
       reasoning: :medium,
       output: output_schema,
       max_turns: 8,
       budget: AimHelm::Budget.new(tokens: 100_000, cost: 2, wall_clock: 300),
       compaction: AimHelm::Compaction.new(
-        model: "gpt-5.6-luna",
+        model: "gpt-6-luna",
         threshold: 0.6,
         system: "Summarize precisely.",
       ),
@@ -39,7 +39,7 @@ RSpec.describe AimHelm::Agent::Record do
       max_iterations: 8,
       budget: have_attributes(tokens: 100_000, cost: 2.0, wall_clock: 300.0),
       compaction: have_attributes(
-        model: "gpt-5.6-luna",
+        model: "gpt-6-luna",
         threshold: 0.6,
         system: "Summarize precisely.",
       ),
@@ -102,7 +102,7 @@ RSpec.describe AimHelm::Agent::Record do
       name: "researcher",
       description: "Researches one question",
       system: "Research carefully.",
-      model: "gpt-5.6-luna",
+      model: "gpt-6-luna",
       tools: ["reports/lookup"],
       output_schema:,
       max_iterations: 4,

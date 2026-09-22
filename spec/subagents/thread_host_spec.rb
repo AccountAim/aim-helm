@@ -19,7 +19,7 @@ RSpec.describe AimHelm::Subagents::ThreadHost do
   end
 
   let(:options) do
-    AimHelm::Agent.new(instructions: "Coordinate.", model: "gpt-5.6-luna", subagents: [])
+    AimHelm::Agent.new(instructions: "Coordinate.", model: "gpt-6-luna", subagents: [])
   end
   let(:parent_session) { AimHelm::Session.new(store: @store, id: "parent-1") }
   let(:subagent_host) { @subagent_host = described_class.new(options:) }

@@ -26,7 +26,7 @@ RSpec.describe AimHelm::Subagents::ReportRecovery do
     )
   end
   let(:mode) { :background }
-  let(:run_record) { AimHelm::Agent::Record.new(system: "Research.", model: "gpt-5.6-luna") }
+  let(:run_record) { AimHelm::Agent::Record.new(system: "Research.", model: "gpt-6-luna") }
 
   before do
     AimHelm::Control.new(session: parent).start(
@@ -53,7 +53,7 @@ RSpec.describe AimHelm::Subagents::ReportRecovery do
       :assistant,
       {
         content: "Research complete",
-        model: "gpt-5.6-luna",
+        model: "gpt-6-luna",
         provider: :openai,
         stop_reason: :stop,
       },

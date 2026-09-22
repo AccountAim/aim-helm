@@ -21,7 +21,7 @@ RSpec.describe AimHelm do
   end
 
   it "resolves host-defined providers from an extended catalog" do
-    model = AimHelm.models.fetch("gpt-5.6-luna").new(
+    model = AimHelm.models.fetch("gpt-6-luna").new(
       id: "gateway-luna",
       provider: :gateway,
     )

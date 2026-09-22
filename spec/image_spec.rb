@@ -111,7 +111,7 @@ RSpec.describe "AimHelm image input" do
   end
 
   it "round-trips native image blocks through requests and the queued-message fold" do
-    record = AimHelm::Agent::Record.new(system: "Inspect images.", model: "gpt-5.6-luna")
+    record = AimHelm::Agent::Record.new(system: "Inspect images.", model: "gpt-6-luna")
     control = AimHelm::Control.new(session: @session)
     first = image("https://example.com/first.png")
     second = image("https://example.com/second.png")

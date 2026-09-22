@@ -19,7 +19,7 @@ RSpec.describe AimHelm::Runner do
   end
   let(:session) { AimHelm::Session.new(store: @store, config:) }
   let(:options) do
-    AimHelm::Agent.new(instructions: "Answer accurately.", model: "gpt-5.6-luna")
+    AimHelm::Agent.new(instructions: "Answer accurately.", model: "gpt-6-luna")
   end
   let(:usage) { AimHelm::Usage.new(input_tokens: 10, output_tokens: 2) }
   let(:message) do

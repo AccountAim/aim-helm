@@ -2,7 +2,7 @@
 
 RSpec.describe "AimHelm live providers", :live do
   {
-    "gpt-5.6-luna" => "OPENAI_API_KEY",
+    "gpt-6-luna" => "OPENAI_API_KEY",
     "claude-opus-5" => "ANTHROPIC_API_KEY",
   }.each do |model, key|
     it "streams a short turn through #{model}" do

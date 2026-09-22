@@ -2,8 +2,8 @@
 
 module AimHelm
   # Loads pricing and capability rows from a YAML catalog into a frozen `id => Catalog::Model`
-  # hash. An `aliases` entry copies the target row under a second id, so "gpt-5.6" resolves like
-  # "gpt-5.6-sol". `Catalog.default` memoizes the bundled models.yml.
+  # hash. An `aliases` entry copies the target row under a second id, so "gpt-6" resolves like
+  # "gpt-6-sol". `Catalog.default` memoizes the bundled models.yml.
   module Catalog
     CATALOG_PATH = File.expand_path("models.yml", __dir__)
 

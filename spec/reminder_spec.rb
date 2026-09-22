@@ -26,7 +26,7 @@ RSpec.describe AimHelm::Reminder do
     noop = AimHelm::Tool.define("noop", "Returns immediately") { "ok" }
     options = AimHelm::Agent.new(
       instructions: "Work carefully.",
-      model: "gpt-5.6-luna",
+      model: "gpt-6-luna",
       tools: [noop],
       reminders: [
         described_class.new(text: "Stay focused.", every: 1),

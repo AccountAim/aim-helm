@@ -27,7 +27,7 @@ Create an agent and run it:
 
 ```ruby
 agent = AimHelm.agent(
-  "gpt-5.6-luna",
+  "gpt-6-luna",
   instructions: "Answer clearly and accurately.",
 )
 

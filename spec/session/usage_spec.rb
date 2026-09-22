@@ -10,7 +10,7 @@ RSpec.describe AimHelm::Session::Usage do
 
   let(:session) { AimHelm::Session.new(store: @store, id: "session-1") }
 
-  def append_assistant(target, model: "gpt-5.6-luna", **usage)
+  def append_assistant(target, model: "gpt-6-luna", **usage)
     counts = { input_tokens: 100, output_tokens: 20, cached_input_tokens: 0,
                cache_write_tokens: 0, reasoning_tokens: 0, cost: 0.001,
                wall_clock: 1.5 }.merge(usage)
@@ -21,7 +21,7 @@ RSpec.describe AimHelm::Session::Usage do
     )
   end
 
-  def append_compaction(target, model: "gpt-5.6-luna", **usage)
+  def append_compaction(target, model: "gpt-6-luna", **usage)
     counts = { input_tokens: 500, output_tokens: 60, cached_input_tokens: 0,
                cache_write_tokens: 0, reasoning_tokens: 0, cost: 0.004,
                wall_clock: 0.5 }.merge(usage)
@@ -39,7 +39,7 @@ RSpec.describe AimHelm::Session::Usage do
 
     steps = session.usage.steps
     expect(steps.map(&:sequence)).to eq([1, 2])
-    expect(steps.first).to have_attributes(model: "gpt-5.6-luna", input: 100, cost: 0.001,
+    expect(steps.first).to have_attributes(model: "gpt-6-luna", input: 100, cost: 0.001,
                                            agent: nil)
     expect(steps.last).to have_attributes(input: 300, cached: 90, cost: 0.002)
   end
@@ -63,18 +63,18 @@ RSpec.describe AimHelm::Session::Usage do
     append_compaction(session)
 
     usage = session.usage
-    expect(usage.by_model.first).to have_attributes(model: "gpt-5.6-luna", calls: 2, input: 600,
+    expect(usage.by_model.first).to have_attributes(model: "gpt-6-luna", calls: 2, input: 600,
                                                     output: 80, cost: 0.005)
     expect(usage.total).to have_attributes(calls: 2, cost: 0.005)
     expect(usage.steps.last.purpose).to eq("compaction")
   end
 
   it "groups a run that switched models" do
-    append_assistant(session, model: "gpt-5.6-luna")
+    append_assistant(session, model: "gpt-6-luna")
     append_assistant(session, model: "gpt-5.6-terra", input_tokens: 200, cost: 0.002)
 
     rows = session.usage.by_model
-    expect(rows.map(&:model)).to eq(%w[gpt-5.6-luna gpt-5.6-terra])
+    expect(rows.map(&:model)).to eq(%w[gpt-6-luna gpt-5.6-terra])
     expect(rows.last).to have_attributes(calls: 1, input: 200)
   end
 
@@ -86,7 +86,7 @@ RSpec.describe AimHelm::Session::Usage do
     usage = session.usage
     expect(usage.steps.map(&:agent)).to eq([nil, "researcher"])
     expect(usage.total).to have_attributes(calls: 2, input: 500, cost: 0.004)
-    expect(usage.by_model.map(&:model)).to contain_exactly("gpt-5.6-luna", "claude-haiku-4-5")
+    expect(usage.by_model.map(&:model)).to contain_exactly("gpt-6-luna", "claude-haiku-4-5")
   end
 
   it "keeps the deepest agent's name when subagents nest" do
