@@ -41,7 +41,7 @@ module AimHelm
       attributes[:base_url] = base_url if base_url
       NATIVE.fetch(model.provider).new(
         api_key: key,
-        model: model_id,
+        model: model.id,
         reasoning:,
         catalog:,
         **attributes,

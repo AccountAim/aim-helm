@@ -1,20 +1,29 @@
 # frozen_string_literal: true
 
 RSpec.describe AimHelm::Catalog::Model do
-  it "loads the current allowlist and resolves the default GPT alias" do
+  it "loads the current allowlist and resolves retired ids to their successors" do
     expect(AimHelm.models.keys).to contain_exactly(
-      "claude-fable-5",
+      "claude-fable-5-1",
       "claude-haiku-4-5",
-      "claude-mythos-5",
-      "claude-opus-5",
+      "claude-opus-5-5",
       "claude-sonnet-5",
-      "gpt-6",
+      "claude-latest-fable",
+      "claude-latest-opus",
+      "claude-latest-sonnet",
+      "claude-latest-haiku",
+      "gpt-latest-astra",
+      "gpt-latest-sol",
+      "gpt-latest-luna",
+      "gpt-latest-terra",
+      "gpt-5.6-sol",
+      "gpt-5.6-luna",
       "gpt-5.6-terra",
       "gpt-6-astra",
       "gpt-6-luna",
       "gpt-6-sol",
     )
-    expect(AimHelm.models.fetch("gpt-6").input).to eq(2.0)
+    expect(AimHelm.models.fetch("gpt-5.6-sol").id).to eq("gpt-6-sol")
+    expect(AimHelm.models.fetch("gpt-latest-sol").id).to eq("gpt-6-sol")
   end
 
   it "carries the flagship's rates and limits" do
@@ -51,7 +60,7 @@ RSpec.describe AimHelm::Catalog::Model do
 
       catalog = AimHelm::Catalog.load(path, base: AimHelm.models)
 
-      expect(catalog.fetch("fast")).to have_attributes(id: "fast", provider: :openai)
+      expect(catalog.fetch("fast")).to have_attributes(id: "gpt-6-luna", provider: :openai)
       expect(catalog).to be_frozen
     end
   end
