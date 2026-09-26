@@ -7,6 +7,8 @@ module AimHelm
       # assistant block becomes its own item, replayed as the verbatim wire item when it came
       # from this provider and model.
       module Serializer
+        CACHE_BREAKPOINT = { prompt_cache_breakpoint: { mode: "explicit" } }.freeze
+
         module_function
 
         def input(history, model:)
@@ -59,11 +61,14 @@ module AimHelm
           }
         end
 
-        # Images need the content-array form of `output`; text-only results stay a plain string.
+        # Every tool output ends with an explicit prompt-cache breakpoint. The reminder appended
+        # to each request is the prompt's latest message and is never in the transcript, so
+        # without a breakpoint here no request could reuse more than the system prompt.
         def tool_output(message)
-          return message.text if message.content.none? { it["type"] == "image" }
-
-          message.content.filter_map { user_content(it) }
+          blocks = message.content.filter_map { user_content(it) }
+          blocks = [{ type: "input_text", text: message.text }] if blocks.empty?
+          blocks[-1] = blocks.last.merge(CACHE_BREAKPOINT)
+          blocks
         end
 
         def assistant_items(message, model:)

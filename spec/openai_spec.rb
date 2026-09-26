@@ -62,7 +62,7 @@ RSpec.describe AimHelm::Providers::OpenAI do
       id: 2,
     )
     expect(AimHelm::Providers::OpenAI::Serializer.replay([entry, result], model:)).to eq(
-      done_items + [{ type: "function_call_output", call_id: "call_123", output: "sunny" }],
+      done_items + [tool_output("call_123", "sunny")],
     )
   end
 
@@ -79,7 +79,8 @@ RSpec.describe AimHelm::Providers::OpenAI do
           call_id: "call_9",
           output: [
             { type: "input_text", text: "caption" },
-            { type: "input_image", image_url: "data:image/png;base64,#{["png-bytes"].pack("m0")}" },
+            { type: "input_image", image_url: "data:image/png;base64,#{["png-bytes"].pack("m0")}",
+              prompt_cache_breakpoint: { mode: "explicit" } },
           ],
         },
       ],
@@ -115,11 +116,7 @@ RSpec.describe AimHelm::Providers::OpenAI do
       name: "weather",
       arguments: "{\"city\":\"Seattle\"}",
     )
-    expect(serialized.last).to eq(
-      type: "function_call_output",
-      call_id: "call_123",
-      output: AimHelm::Replay::INTERRUPTED_TOOL_RESULT,
-    )
+    expect(serialized.last).to eq(tool_output("call_123", AimHelm::Replay::INTERRUPTED_TOOL_RESULT))
   end
 
   it "serializes every recorded log prefix into valid Responses API history" do
@@ -249,4 +246,12 @@ RSpec.describe AimHelm::Providers::OpenAI do
   end
 
   def user?(item) = item["type"] == "message" && item["role"] == "user"
+
+  def tool_output(call_id, text)
+    {
+      type: "function_call_output",
+      call_id:,
+      output: [{ type: "input_text", text:, prompt_cache_breakpoint: { mode: "explicit" } }],
+    }
+  end
 end
