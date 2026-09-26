@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe AimHelm::Providers::Anthropic do
-  let(:model) { "claude-opus-5" }
+  let(:model) { "claude-opus-5-5" }
   let(:records) { sse_records("streams/anthropic_turn.sse") }
 
   it "maps an Anthropic refusal to a normal stop" do

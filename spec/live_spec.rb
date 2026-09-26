@@ -3,7 +3,7 @@
 RSpec.describe "AimHelm live providers", :live do
   {
     "gpt-6-luna" => "OPENAI_API_KEY",
-    "claude-opus-5" => "ANTHROPIC_API_KEY",
+    "claude-opus-5-5" => "ANTHROPIC_API_KEY",
   }.each do |model, key|
     it "streams a short turn through #{model}" do
       require_live!(key)
@@ -43,7 +43,7 @@ RSpec.describe "AimHelm live providers", :live do
     end
   end
 
-  it "accepts adaptive thinking with structured output through claude-opus-5" do
+  it "accepts adaptive thinking with structured output through claude-opus-5-5" do
     require_live!("ANTHROPIC_API_KEY")
     schema = {
       type: "object",
@@ -51,7 +51,7 @@ RSpec.describe "AimHelm live providers", :live do
       required: ["answer"],
       additionalProperties: false,
     }
-    provider = AimHelm.provider("claude-opus-5", reasoning: :low)
+    provider = AimHelm.provider("claude-opus-5-5", reasoning: :low)
 
     message = provider.stream(
       messages: [AimHelm::Message.user("Return OK in the required structure.")],
@@ -63,12 +63,12 @@ RSpec.describe "AimHelm live providers", :live do
     provider&.close
   end
 
-  it "writes and reads an Anthropic prompt cache through claude-opus-5" do
+  it "writes and reads an Anthropic prompt cache through claude-opus-5-5" do
     require_live!("ANTHROPIC_API_KEY")
     nonce = SecureRandom.uuid_v7
     system = "Cache test #{nonce}. #{"Retain this stable context. " * 2_000}"
     messages = [AimHelm::Message.user("Reply only OK.")]
-    provider = AimHelm.provider("claude-opus-5")
+    provider = AimHelm.provider("claude-opus-5-5")
 
     first = provider.stream(system:, messages:)
     second = provider.stream(system:, messages:)

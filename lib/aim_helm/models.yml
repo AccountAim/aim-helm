@@ -1,35 +1,38 @@
+# An alias resolves to its target's row and id, so a request for the alias goes out as the
+# target. `<vendor>-latest-<size>` is the current model of that size, for apps that want to
+# follow along. A retired id points at the latest of its size so existing chats keep running,
+# but only for a while: apps should move their chats' pins to a current id and rely on these
+# only as a bridge.
 aliases:
-  gpt-6: gpt-6-sol
+  claude-latest-fable: claude-fable-5-1
+  claude-latest-opus: claude-opus-5-5
+  claude-latest-sonnet: claude-sonnet-5
+  claude-latest-haiku: claude-haiku-4-5
+  gpt-latest-astra: gpt-6-astra
+  gpt-latest-sol: gpt-6-sol
+  gpt-latest-luna: gpt-6-luna
+  gpt-latest-terra: gpt-5.6-terra
+  gpt-5.6-sol: gpt-latest-sol
+  gpt-5.6-luna: gpt-latest-luna
 
 models:
-  claude-fable-5:
+  claude-fable-5-1:
     provider: anthropic
     input: 10.0
     output: 50.0
-    cached_input: 1.0
+    cached_input: 0.25
     cache_write: 12.5
     context: 1000000
     max_output: 128000
     reasoning_effort: true
     vision: true
 
-  claude-mythos-5:
+  claude-opus-5-5:
     provider: anthropic
-    input: 10.0
-    output: 50.0
-    cached_input: 1.0
-    cache_write: 12.5
-    context: 1000000
-    max_output: 128000
-    reasoning_effort: true
-    vision: true
-
-  claude-opus-5:
-    provider: anthropic
-    input: 5.0
-    output: 25.0
-    cached_input: 0.5
-    cache_write: 6.25
+    input: 4.0
+    output: 20.0
+    cached_input: 0.2
+    cache_write: 5.0
     context: 1000000
     max_output: 128000
     reasoning_effort: true
@@ -100,4 +103,3 @@ models:
     max_output: 128000
     reasoning_effort: true
     vision: true
-
