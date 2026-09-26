@@ -28,6 +28,9 @@ module AimHelm
     attribute :reminders,
               Types::Array.of(Types.Instance(AimHelm::Reminder)).default([].freeze)
     attribute :subagents, Types::Array.of(Types.Instance(Subagent)).optional.default(nil)
+    # Tool calls one turn runs at once; inline subagents count, since a spawn is a tool call.
+    attribute :tool_concurrency,
+              Types::Coercible::Integer.constrained(gt: 0).default(Tools::Executor::MAX_CONCURRENCY)
     attribute :tools, Types::Array.of(Types.Instance(AimHelm::Tool)).default([].freeze)
 
     def subagents? = !subagents.nil?
