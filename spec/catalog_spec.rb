@@ -55,12 +55,13 @@ RSpec.describe AimHelm::Catalog::Model do
       path = File.join(dir, "models.yml")
       File.write(
         path,
-        YAML.dump("models" => {}, "aliases" => { "fast" => "gpt-6-luna" }),
+        YAML.dump("models" => {}, "aliases" => { "old" => "fast", "fast" => "gpt-6-luna" }),
       )
 
       catalog = AimHelm::Catalog.load(path, base: AimHelm.models)
 
       expect(catalog.fetch("fast")).to have_attributes(id: "gpt-6-luna", provider: :openai)
+      expect(catalog.fetch("old")).to have_attributes(id: "gpt-6-luna")
       expect(catalog).to be_frozen
     end
   end

@@ -17,11 +17,21 @@ module AimHelm
         end,
       )
 
-      data.fetch("aliases", {}).each do |name, target|
-        models[name] = models.fetch(target)
-      end
+      aliases = data.fetch("aliases", {})
+      aliases.each_key { models[it] = models.fetch(resolve(it, aliases)) }
 
       models.freeze
+    end
+
+    # The model at the end of an alias chain, in any order: old -> latest -> model.
+    def resolve(name, aliases)
+      chain = [name]
+      while aliases.key?(chain.last) && chain.size <= aliases.size
+        chain << aliases.fetch(chain.last)
+      end
+      raise ArgumentError, "alias cycle: #{chain.join(" -> ")}" if aliases.key?(chain.last)
+
+      chain.last
     end
 
     def default = @default ||= load(CATALOG_PATH)

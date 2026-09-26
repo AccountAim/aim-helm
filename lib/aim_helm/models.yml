@@ -1,7 +1,6 @@
 # An alias resolves to its target's row and id, so a request for the alias goes out as the
 # target. `<vendor>-latest-<size>` is the current model of that size, for apps that want to
 # follow along; a retired id points at the latest of its size so existing chats keep running.
-# Aliases resolve in order, so a target that is itself an alias must come first.
 aliases:
   claude-latest-fable: claude-fable-5-1
   claude-latest-opus: claude-opus-5-5
