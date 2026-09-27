@@ -302,6 +302,7 @@ module AimHelm
       @tools_runtime ||= tool_runner || Tools::Runner.new(
         tools: options.tools,
         authorize:,
+        max_concurrency: options.tool_concurrency,
         on_interrupted_tool:,
       )
     end

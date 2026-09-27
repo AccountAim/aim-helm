@@ -21,6 +21,7 @@ RSpec.describe AimHelm::Agent::Record do
         system: "Summarize precisely.",
       ),
       reminders: [AimHelm::Reminder.new(text: "Stay focused.", every: 3, after: 1)],
+      tool_concurrency: 3,
     )
   end
 
@@ -44,6 +45,7 @@ RSpec.describe AimHelm::Agent::Record do
         system: "Summarize precisely.",
       ),
       reminders: [have_attributes(text: "Stay focused.", every: 3, after: 1)],
+      tool_concurrency: 3,
     )
     expect(restored.materialize(tools: [tool])).to have_attributes(
       instructions: options.instructions,
@@ -52,6 +54,7 @@ RSpec.describe AimHelm::Agent::Record do
       budget: options.budget,
       compaction: options.compaction,
       reminders: options.reminders,
+      tool_concurrency: 3,
       output: have_attributes(
         json_schema: AimHelm::Types::JsonObject[output_schema.json_schema],
       ),

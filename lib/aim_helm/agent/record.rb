@@ -22,6 +22,7 @@ module AimHelm
         optional(:budget).maybe(:hash)
         optional(:compaction).maybe(:hash)
         optional(:reminders).array(:hash)
+        optional(:tool_concurrency).maybe(:integer)
       end
 
       extend ClosedRecord
@@ -37,6 +38,8 @@ module AimHelm
                 Types::Array.of(Types.Instance(AimHelm::Reminder)).default([].freeze)
       attribute :subagents, Types::Array.of(Types.Instance(Subagent)).optional.default(nil)
       attribute :system, Types::String
+      attribute :tool_concurrency,
+                Types::Coercible::Integer.constrained(gt: 0).default(Tools::Executor::MAX_CONCURRENCY)
       attribute :tools, Types::Array.of(Types::String).default([].freeze)
       attribute :version, Types::Integer.default(VERSION)
 
@@ -55,6 +58,7 @@ module AimHelm
             budget: options.budget,
             compaction: options.compaction,
             reminders: options.reminders,
+            tool_concurrency: options.tool_concurrency,
           )
         end
 
@@ -116,6 +120,7 @@ module AimHelm
           budget:,
           compaction:,
           reminders:,
+          tool_concurrency:,
         )
       end
 
