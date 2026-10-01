@@ -190,13 +190,16 @@ module AimHelm
           @current_usage = build_usage(response["usage"]) if response["usage"]
         end
 
-        # OpenAI counts cached tokens inside input_tokens; Usage keeps the two disjoint.
+        # OpenAI counts cached and cache-write tokens inside input_tokens; Usage keeps all three
+        # disjoint.
         def build_usage(raw)
           cached = raw.dig("input_tokens_details", "cached_tokens").to_i
+          written = raw.dig("input_tokens_details", "cache_write_tokens").to_i
           Usage.new(
-            input_tokens: [raw.fetch("input_tokens", 0).to_i - cached, 0].max,
+            input_tokens: [raw.fetch("input_tokens", 0).to_i - cached - written, 0].max,
             output_tokens: raw.fetch("output_tokens", 0).to_i,
             cached_input_tokens: cached,
+            cache_write_tokens: written,
             reasoning_tokens: raw.dig("output_tokens_details", "reasoning_tokens").to_i,
           )
         end

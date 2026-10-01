@@ -34,7 +34,7 @@ RSpec.describe AimHelm::Message do
         { type: "text", text: "working" },
         { type: "tool_call", id: "call_1", name: "search", arguments: { query: "ruby" } },
       ],
-      model: "gpt-6-luna",
+      model: "gpt-latest-luna",
       provider: :openai,
       usage: AimHelm::Usage.new,
       stop_reason: :tool_use,

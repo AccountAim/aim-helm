@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe AimHelm::Providers::OpenAI do
-  let(:model) { "gpt-6.1-sol" }
+  let(:model) { "gpt-latest-sol" }
   let(:records) { sse_records("streams/openai_turn.sse") }
 
   it "assembles normalized events and replays exact same-model items" do
@@ -23,10 +23,10 @@ RSpec.describe AimHelm::Providers::OpenAI do
       "arguments" => { "city" => "Seattle" },
     )
     expect(message.usage.to_h).to eq(
-      input_tokens: 50,
+      input_tokens: 30,
       output_tokens: 5,
       cached_input_tokens: 10,
-      cache_write_tokens: 0,
+      cache_write_tokens: 20,
       reasoning_tokens: 2,
     )
 
@@ -102,7 +102,7 @@ RSpec.describe AimHelm::Providers::OpenAI do
         stop_reason: message.stop_reason,
       },
     )
-    serialized = AimHelm::Providers::OpenAI::Serializer.replay([entry], model: "gpt-5.6-terra")
+    serialized = AimHelm::Providers::OpenAI::Serializer.replay([entry], model: "gpt-latest-terra")
 
     expect(serialized.first).to eq(
       type: "message",

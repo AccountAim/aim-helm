@@ -4,7 +4,7 @@ Grant an agent a named specialist and the modes in which it may run:
 
 ```ruby
 auditor = AimHelm.agent(
-  "gpt-6-luna",
+  "gpt-latest-luna",
   name: "ledger_auditor",
   description: "Checks ledger arithmetic and reports discrepancies.",
   instructions: "Audit the ledger and show every calculation.",
@@ -12,7 +12,7 @@ auditor = AimHelm.agent(
 )
 
 coordinator = AimHelm.agent(
-  "gpt-6.1-sol",
+  "gpt-latest-sol",
   instructions: "Delegate ledger checks to the auditor.",
   subagents: [
     AimHelm::Subagent.new(agent: auditor, modes: %i[inline background]),

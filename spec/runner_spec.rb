@@ -19,7 +19,7 @@ RSpec.describe AimHelm::Runner do
   end
   let(:session) { AimHelm::Session.new(store: @store, config:) }
   let(:options) do
-    AimHelm::Agent.new(instructions: "Answer accurately.", model: "gpt-6-luna")
+    AimHelm::Agent.new(instructions: "Answer accurately.", model: "gpt-latest-luna")
   end
   let(:usage) { AimHelm::Usage.new(input_tokens: 10, output_tokens: 2) }
   let(:message) do
@@ -116,7 +116,7 @@ RSpec.describe AimHelm::Runner do
     long_message = message.new(usage: long_usage)
     summary = AimHelm::Message.assistant(
       content: "The report is ready.",
-      model: "claude-haiku-4-5",
+      model: "claude-latest-haiku",
       provider: :anthropic,
       usage: AimHelm::Usage.new(input_tokens: 3),
       stop_reason: :stop,
@@ -129,7 +129,7 @@ RSpec.describe AimHelm::Runner do
     end
     configured = options.new(
       compaction: AimHelm::Compaction.new(
-        model: "claude-haiku-4-5",
+        model: "claude-latest-haiku",
         threshold: 0.5,
         system: "Keep only durable facts.",
       ),
@@ -156,7 +156,7 @@ RSpec.describe AimHelm::Runner do
     expect(session.status).to eq(:completed)
     expect(requests.last.fetch(:system)).to eq("Keep only durable facts.")
     expect(resolved_models).to include(
-      ["claude-haiku-4-5", hash_including(reasoning: nil)],
+      ["claude-latest-haiku", hash_including(reasoning: nil)],
     )
   end
 
