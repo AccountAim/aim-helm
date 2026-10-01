@@ -9,9 +9,10 @@ aliases:
   claude-latest-sonnet: claude-sonnet-5
   claude-latest-haiku: claude-haiku-4-5
   gpt-latest-astra: gpt-6-astra
-  gpt-latest-sol: gpt-6-sol
+  gpt-latest-sol: gpt-6.1-sol
   gpt-latest-luna: gpt-6-luna
   gpt-latest-terra: gpt-5.6-terra
+  gpt-6-sol: gpt-latest-sol
   gpt-5.6-sol: gpt-latest-sol
   gpt-5.6-luna: gpt-latest-luna
 
@@ -71,11 +72,11 @@ models:
     reasoning_effort: true
     vision: true
 
-  gpt-6-sol:
+  gpt-6.1-sol:
     provider: openai
     input: 2.0
     output: 10.0
-    cached_input: 0.2
+    cached_input: 0.1
     cache_write: 0.0
     context: 1050000
     max_output: 128000

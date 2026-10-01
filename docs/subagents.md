@@ -12,7 +12,7 @@ auditor = AimHelm.agent(
 )
 
 coordinator = AimHelm.agent(
-  "gpt-6-sol",
+  "gpt-6.1-sol",
   instructions: "Delegate ledger checks to the auditor.",
   subagents: [
     AimHelm::Subagent.new(agent: auditor, modes: %i[inline background]),

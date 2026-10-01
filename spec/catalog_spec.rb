@@ -21,9 +21,11 @@ RSpec.describe AimHelm::Catalog::Model do
       "gpt-6-astra",
       "gpt-6-luna",
       "gpt-6-sol",
+      "gpt-6.1-sol",
     )
-    expect(AimHelm.models.fetch("gpt-5.6-sol").id).to eq("gpt-6-sol")
-    expect(AimHelm.models.fetch("gpt-latest-sol").id).to eq("gpt-6-sol")
+    expect(AimHelm.models.fetch("gpt-5.6-sol").id).to eq("gpt-6.1-sol")
+    expect(AimHelm.models.fetch("gpt-6-sol").id).to eq("gpt-6.1-sol")
+    expect(AimHelm.models.fetch("gpt-latest-sol").id).to eq("gpt-6.1-sol")
   end
 
   it "carries the flagship's rates and limits" do
@@ -41,7 +43,7 @@ RSpec.describe AimHelm::Catalog::Model do
       cache_write_tokens: 100,
     )
 
-    expect(AimHelm.models.fetch("gpt-6-sol").cost(usage)).to eq(0.00704)
+    expect(AimHelm.models.fetch("gpt-6.1-sol").cost(usage)).to eq(0.00702)
   end
 
   it "keeps every OpenAI cache-write rate at zero" do
