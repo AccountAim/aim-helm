@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe AimHelm::Providers::Anthropic do
-  let(:model) { "claude-opus-5-5" }
+  let(:model) { "claude-latest-opus" }
   let(:records) { sse_records("streams/anthropic_turn.sse") }
 
   it "maps an Anthropic refusal to a normal stop" do
@@ -125,7 +125,7 @@ RSpec.describe AimHelm::Providers::Anthropic do
       },
     )
     content = AimHelm::Providers::Anthropic::Serializer
-              .replay([entry], model: "claude-sonnet-5")
+              .replay([entry], model: "claude-latest-sonnet")
               .first.fetch(:content)
 
     expect(content.first).to eq(type: "text", text: "Use the weather tool.")

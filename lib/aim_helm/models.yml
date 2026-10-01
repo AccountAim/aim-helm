@@ -9,9 +9,10 @@ aliases:
   claude-latest-sonnet: claude-sonnet-5
   claude-latest-haiku: claude-haiku-4-5
   gpt-latest-astra: gpt-6-astra
-  gpt-latest-sol: gpt-6-sol
+  gpt-latest-sol: gpt-6.1-sol
   gpt-latest-luna: gpt-6-luna
   gpt-latest-terra: gpt-5.6-terra
+  gpt-6-sol: gpt-latest-sol
   gpt-5.6-sol: gpt-latest-sol
   gpt-5.6-luna: gpt-latest-luna
 
@@ -65,41 +66,65 @@ models:
     input: 10.0
     output: 50.0
     cached_input: 1.0
-    cache_write: 0.0
+    cache_write: 12.5
     context: 1050000
     max_output: 128000
     reasoning_effort: true
     vision: true
+    long_context:
+      above: 272000
+      input: 20.0
+      cached_input: 2.0
+      cache_write: 25.0
+      output: 75.0
 
-  gpt-6-sol:
+  gpt-6.1-sol:
     provider: openai
     input: 2.0
     output: 10.0
-    cached_input: 0.2
-    cache_write: 0.0
+    cached_input: 0.1
+    cache_write: 2.5
     context: 1050000
     max_output: 128000
     reasoning_effort: true
     vision: true
+    long_context:
+      above: 272000
+      input: 4.0
+      cached_input: 0.2
+      cache_write: 5.0
+      output: 15.0
 
   gpt-6-luna:
     provider: openai
     input: 0.1
     output: 0.5
     cached_input: 0.01
-    cache_write: 0.0
+    cache_write: 0.125
     context: 1050000
     max_output: 128000
     reasoning_effort: true
     vision: true
+    long_context:
+      above: 272000
+      input: 0.2
+      cached_input: 0.02
+      cache_write: 0.25
+      output: 0.75
 
   gpt-5.6-terra:
     provider: openai
     input: 2.0
     output: 12.0
     cached_input: 0.2
-    cache_write: 0.0
+    cache_write: 2.5
     context: 1050000
     max_output: 128000
     reasoning_effort: true
     vision: true
+    long_context:
+      above: 272000
+      input: 4.0
+      cached_input: 0.4
+      cache_write: 5.0
+      output: 18.0
