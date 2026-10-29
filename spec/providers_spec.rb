@@ -14,9 +14,13 @@ RSpec.describe AimHelm::Providers do
     end.to raise_error(AimHelm::ConfigurationError, /unknown model/)
   end
 
-  it "rejects generic reasoning effort for Haiku" do
+  it "rejects reasoning effort for a model without it" do
+    model = AimHelm.models.fetch("claude-latest-haiku")
+                   .new(id: "no-effort", reasoning_effort: false)
+    config = AimHelm.config.with(model_catalog: AimHelm.models.merge(model.id => model).freeze)
+
     expect do
-      AimHelm.provider("claude-latest-haiku", api_key: "key", reasoning: :high)
+      AimHelm.provider(model.id, config:, api_key: "key", reasoning: :high)
     end.to raise_error(AimHelm::ConfigurationError, /does not support reasoning effort/)
   end
 end
