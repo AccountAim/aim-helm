@@ -156,7 +156,7 @@ RSpec.describe AimHelm::Runner do
     expect(session.status).to eq(:completed)
     expect(requests.last.fetch(:system)).to eq("Keep only durable facts.")
     expect(resolved_models).to include(
-      ["claude-latest-haiku", hash_including(reasoning: nil)],
+      ["claude-latest-haiku", hash_including(reasoning: :low)],
     )
   end
 
