@@ -20,7 +20,7 @@ module AimHelm
           serialized = groups.map do
             it.first.tool? ? tool_results(it) : message(it.first, model:)
           end
-          merge_turns(serialized)
+          mark_last_tool_result(merge_turns(serialized))
         end
 
         def replay(entries, model:) = messages(Replay.messages(entries), model:)
@@ -62,6 +62,15 @@ module AimHelm
               turns << message
             end
           end
+        end
+
+        # The last tool result carries a cache breakpoint. The reminder appended to each request is
+        # its latest block and is never in the transcript, so the automatic breakpoint lands where
+        # the next request differs; this one lands on a block the next request repeats.
+        def mark_last_tool_result(turns)
+          last = turns.flat_map { it.fetch(:content) }.reverse.find { it[:type] == "tool_result" }
+          last[:cache_control] = CACHE_CONTROL if last
+          turns
         end
 
         def block(content, own_model:)
